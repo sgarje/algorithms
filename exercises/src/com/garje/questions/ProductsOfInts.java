@@ -1,0 +1,87 @@
+/**
+ * You have an array of integers, and for each index you want to find the 
+ * product of every integer except the integer at that index.
+ * For example, given:  		[1, 7, 3, 4] 
+ * your function would return: [84, 12, 28, 21]
+ */
+package com.garje.questions;
+
+import java.util.Arrays;
+
+/**
+ * @author sanjay.garje	
+ *
+ */
+public class ProductsOfInts {
+
+	/**
+	 * This is done by using our first programming instinct to loop through array several times
+	 * which does give us the results but run time complexity is O(n*n)
+	 * @param inputArray
+	 * @return productArray
+	 */
+	public static int[] productArrayInts(int[] inputArray) {
+		
+		if (inputArray == null ) {
+			return inputArray;
+		}
+		int[] productArray = new int[inputArray.length];
+		int product = 1;	
+		
+		for (int i=0; i<inputArray.length;i++) {
+			product = 1;
+			for (int j=0; j<inputArray.length;j++) {
+				if (i!=j) {
+					product = product*inputArray[j];
+				}
+				productArray[i] = product;
+			}
+		}
+			
+		return productArray;
+	}
+	
+	/**
+	 * This is done by using elegant approach with O(n) runtime complexity
+	 * @param inputArray
+	 * @return productArray
+	 */
+	public static int[] getProductsOfAllIntsExceptAtIndex(int[] intArray) {
+	
+	    // we make an array with the length of the input array to
+	    // hold our products
+	    int[] productsOfAllIntsExceptAtIndex = new int[intArray.length];
+
+	    // for each integer, we find the product of all the integers
+	    // before it, storing the total product so far each time
+	    int productSoFar = 1;
+	    for (int i = 0; i < intArray.length; i++) {
+	        productsOfAllIntsExceptAtIndex[i] = productSoFar;
+	        productSoFar *= intArray[i];
+	    }
+
+	    // for each integer, we find the product of all the integers
+	    // after it. since each index in products already has the
+	    // product of all the integers before it, now we're storing
+	    // the total product of all other integers
+	    productSoFar = 1;
+	    for (int i = intArray.length - 1; i >= 0; i--) {
+	        productsOfAllIntsExceptAtIndex[i] *= productSoFar;
+	        productSoFar *= intArray[i];
+	    }
+
+	    return productsOfAllIntsExceptAtIndex;
+		}
+
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args){
+		int[] testArray = {1,7,3,4};
+		System.out.println("The input is: "+Arrays.toString(testArray));
+		System.out.println("The output using brutForce is: "+Arrays.toString(productArrayInts(testArray)));
+		System.out.println("The output using elegant approach is: "+Arrays.toString(getProductsOfAllIntsExceptAtIndex(testArray)));
+	}
+
+}
