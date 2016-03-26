@@ -1,0 +1,43 @@
+/**
+ * Your company built an in-house calendar tool called HiCal. 
+ * You want to add a feature to see the times in a day when everyone is available. 
+ */
+package com.garje.questions;
+
+import java.util.Arrays;
+
+/**
+ * @author sanjay.garje	
+ *
+ */
+public class MeetingsMerge {
+	
+	
+	public class Meeting {
+
+	    int startTime;
+	    int endTime;
+
+	    public Meeting(int startTime, int endTime) {
+	        // number of 30 min blocks past 9:00 am
+	        this.startTime = startTime;
+	        this.endTime   = endTime;
+	    }
+
+	    public String toString() {
+	        return String.format("(%d, %d)", startTime, endTime);
+	    }
+	}
+
+
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args){
+		int[] testArray = {1,7,3,4};
+		System.out.println("The input is: "+Arrays.toString(testArray));
+		System.out.println("The output using elegant approach is: "+Arrays.toString(getProductsOfAllIntsExceptAtIndex(testArray)));
+	}
+
+}
